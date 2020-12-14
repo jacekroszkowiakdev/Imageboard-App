@@ -1,10 +1,37 @@
 <!doctype html>
 <html>
 <head>
-    <title></title>
+    <title>My imageboard</title>
+    <link rel="stylesheet" href="/style.css">
 </head>
 <body>
+    <h1>Imageboard</h1>
+    <div id="main">
+        <!-- v-bind:class="myClassName"
+        <!-- <img :src="image.url" alt=""> -->
+        <!-- <h2 :class="myClassName">The best cohort is: {{ name }}</h2>
+        <h2>Maths! 2 * 2 = {{ 2 * 2 }}</h2>
+        <h2>Capitalise! {{ "hello".toUpperCase() }} </h2>
+        <h2 v-if="seen">Can you see me?</h2>
+        <h2 v-else>I am the else</h2> -->
+        <!-- v-on:click="petesMethod" -->
+        <!-- <ul>
+            <li v-for="city in cities" @click="petesMethod(city.name)">
+                {{ city.name }}, {{ city.country }}
+            </li>
+        </ul> -->
+        <h1>PIXELS LOGO</h1>
+        <h2>Latest Images</h2>
+        <ul v-for="image in images">
+            <img :src="image.url" alt="">
+            <h4>{{image.title}}</h4>
+            <p>{{image.description}}</p>
+        </ul>
+
+    </div>
     <script src="/js/vue.js"></script>
     <script src="/js/axios.min.js"></script>
+    <script src="/js/script.js"></script>
 </body>
 </html>
+
