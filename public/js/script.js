@@ -7,7 +7,7 @@ new Vue({
     },
 
     mounted: function () {
-        console.log("Vue component mounted");
+        console.log("Component mounted");
         var self = this;
         axios
             .get("/images")
