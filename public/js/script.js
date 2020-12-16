@@ -1,4 +1,29 @@
 (function () {
+    // vue component should be placed before Vue-Parent instance:
+    Vue.component("modal-component", {
+        // The first argument is a string to use as the name of the component. You use the name as a tag name in your HTML to render the component
+
+        // You don't pass an el to Vue.component because they get rendered in place where their tag is encountered. Rather than an el, you specify a template to use for the component's DOM subtree:
+        template: "#template",
+        props: ["doSOMETHING/PLACEHOLDER"],
+
+        //data you pass to Vue.component must be a function that returns an object:
+        data: function () {
+            return {
+                name: "Layla",
+            };
+        },
+        mounted: function () {
+            console.log("props: ", this.doSOMETHING / PLACEHOLDER);
+        },
+        methods: {
+            closeModal: function () {
+                console.log("about to emit an even from the component");
+                this.$emit("close");
+            },
+        },
+    });
+
     new Vue({
         el: "#main",
         data: {
@@ -9,6 +34,8 @@
             uploadedImage: null,
             description: "",
             username: "",
+            onscreen: true,
+            id: null,
         },
 
         mounted: function () {
@@ -50,6 +77,11 @@
             handleFileChange: function (evt) {
                 // Set the data's "image" property to the newly uploaded file
                 this.uploadedImage = evt.target.files[0];
+            },
+
+            getId: function (imageId) {
+                console.log("clicked ID: ", imageId);
+                // this.id = image.id;
             },
         },
     });
