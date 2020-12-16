@@ -5,16 +5,32 @@
 
         // You don't pass an el to Vue.component because they get rendered in place where their tag is encountered. Rather than an el, you specify a template to use for the component's DOM subtree:
         template: "#modal-template",
-        props: ["doSOMETHING/PLACEHOLDER"],
+        props: ["id"],
 
         //data you pass to Vue.component must be a function that returns an object:
         data: function () {
             return {
-                name: "Layla",
+                heading: "Modal Component",
+                clickedImageId: "",
+                url: "",
+                title: "",
+                description: "",
+                username: "",
+                created_at: "",
             };
         },
         mounted: function () {
-            console.log("props: ", this.doSOMETHING / PLACEHOLDER);
+            console.log("modal-component has loaded");
+            console.log("props: ", this.id); // not showing
+
+            var self = this;
+            axios.get("/clicked-image", this.id);
+            then(function (res) {
+                console.log("res inside mounted modal: ", res);
+                self.images = res.data;
+            }).catch(function (err) {
+                console.log(`GET" "/clicked-image:"`, res);
+            });
         },
         methods: {
             closeModal: function () {
@@ -34,8 +50,7 @@
             uploadedImage: null,
             description: "",
             username: "",
-            onscreen: true,
-            id: null,
+            clickedImageId: null,
         },
 
         mounted: function () {
@@ -46,6 +61,7 @@
                 .then(function (res) {
                     console.log("res inside mounted:", res);
                     self.images = res.data;
+                    console.log("self.images = ", res.data);
                 })
                 .catch(function (err) {
                     console.log(`GET '/images':`, err);
@@ -81,7 +97,9 @@
 
             getId: function (imageId) {
                 console.log("clicked ID: ", imageId);
-                // this.id = image.id;
+                this.id = imageid;
+                // console.log("this.id: ", this.id);
+                this.clickedImageId = imageId;
             },
         },
     });

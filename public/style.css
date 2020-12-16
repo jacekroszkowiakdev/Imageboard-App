@@ -2,6 +2,28 @@
     box-sizing: border-box;
 }
 
+[v-cloak] > * {
+    display: none;
+}
+
 main {
     display: flex;
+}
+
+modal-component {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    visibility: hidden;
+    display: grid;
+    z-index: 100;
+}
+
+modal:onscreen {
+    visibility: visible; V=CLOAK
+}
+
+
+[v-cloak]::before {
+    content: "loading...";
 }
