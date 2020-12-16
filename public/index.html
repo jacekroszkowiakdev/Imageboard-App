@@ -6,6 +6,26 @@
 </head>
 <body>
     <h1>Imageboard</h1>
+
+    <div id="uploader">
+        <form action="upload" method="post" enctype="multipart/form-data">
+            <!-- Bind the input value to the Vue instance with `v-model` -->
+            <input type="text" name="title" placeholder="Title" v-model="title" />
+            <input type="text" name="description" placeholder="Description" v-model="description" />
+            <input type="text" name="Username" placeholder="username" v-model="username" />
+            <!-- Handle file changes by providing a method to `@change` -->
+            <input
+                name="image"
+                type="file"
+                accept="image/*"
+                @change="handleFileChange"
+            />
+            <!-- Handle upload clicks by providing a method to `@click` -->
+            <!-- Also available:  <button @click="upload">Upload</button> -->
+            <button @click.prevent.default="upload">Upload</button>
+        </form>
+    </div>
+
     <div id="main">
         <!-- v-bind:class="myClassName"
         <!-- <img :src="image.url" alt=""> -->
@@ -20,11 +40,14 @@
                 {{ city.name }}, {{ city.country }}
             </li>
         </ul> -->
+
         <h2>Latest Images</h2>
+        <div class="imageboard">
         <ul v-for="image in images">
             <img :src="image.url" alt="">
             <h4>{{image.title}}</h4>
             <p>{{image.description}}</p>
+        </div>
         </ul>
 
     </div>

@@ -3,7 +3,7 @@ new Vue({
     data: {
         name: "Pixels",
         seen: true,
-        pictures: [],
+        images: [],
     },
 
     mounted: function () {
@@ -12,6 +12,7 @@ new Vue({
         axios
             .get("/images")
             .then(function (res) {
+                console.log("res inside mounted:", res);
                 self.images = res.data;
             })
             .catch(function (err) {
@@ -26,4 +27,28 @@ new Vue({
     //         this.name = city;
     //     },
     // },
+});
+
+new Vue({
+    el: "#uploader",
+    data: {
+        title: "",
+        image: null,
+        description,
+    },
+    methods: {
+        //@change is the
+        handleFileChange: function (e) {
+            // Set the data's "image" property to the newly uploaded file
+            this.image = e.target.files[0];
+        },
+        upload: function (e) {
+            // Prevent the default behavior (i.e navigating to a new page on submitting the form)
+            e.preventDefault();
+
+            // TODO:
+            // 1. Create a FormData instance and append the relevant fields
+            // 2. Post the form data to the "/uploads" route with axios
+        },
+    },
 });
