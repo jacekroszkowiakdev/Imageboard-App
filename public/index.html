@@ -7,41 +7,26 @@
 <body>
     <h1>Imageboard</h1>
 
-    <div id="uploader">
+    <div id="main">
+        <h2>Latest Images</h2>
+        <div id="uploader">
         <form action="upload" method="post" enctype="multipart/form-data">
             <!-- Bind the input value to the Vue instance with `v-model` -->
             <input type="text" name="title" placeholder="Title" v-model="title" />
             <input type="text" name="description" placeholder="Description" v-model="description" />
-            <input type="text" name="Username" placeholder="username" v-model="username" />
+            <input type="text" name="username" placeholder="Username" v-model="username" />
             <!-- Handle file changes by providing a method to `@change` -->
             <input
-                name="image"
                 type="file"
+                name="image"
                 accept="image/*"
                 @change="handleFileChange"
             />
             <!-- Handle upload clicks by providing a method to `@click` -->
             <!-- Also available:  <button @click="upload">Upload</button> -->
-            <button @click.prevent.default="upload">Upload</button>
+            <button @click.prevent.default="handleOnClickUpload">Upload</button>
         </form>
     </div>
-
-    <div id="main">
-        <!-- v-bind:class="myClassName"
-        <!-- <img :src="image.url" alt=""> -->
-        <!-- <h2 :class="myClassName">The best cohort is: {{ name }}</h2>
-        <h2>Maths! 2 * 2 = {{ 2 * 2 }}</h2>
-        <h2>Capitalise! {{ "hello".toUpperCase() }} </h2>
-        <h2 v-if="seen">Can you see me?</h2>
-        <h2 v-else>I am the else</h2> -->
-        <!-- v-on:click="petesMethod" -->
-        <!-- <ul>
-            <li v-for="city in cities" @click="petesMethod(city.name)">
-                {{ city.name }}, {{ city.country }}
-            </li>
-        </ul> -->
-
-        <h2>Latest Images</h2>
         <div class="imageboard">
         <ul v-for="image in images">
             <img :src="image.url" alt="">

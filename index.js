@@ -3,7 +3,6 @@ const app = express();
 const db = require("./db");
 const s3 = require("./s3");
 const { s3Url } = require("./config.json");
-console.log("S3 is: ", s3);
 
 // Multer is a node.js middleware for handling multipart/form-data, which is primarily used for uploading files. It is written on top of busboy for maximum efficiency:
 const multer = require("multer");
@@ -14,7 +13,7 @@ const path = require("path");
 
 const diskStorage = multer.diskStorage({
     destination: function (req, file, callback) {
-        callback(null, __dirname + "/upload");
+        callback(null, __dirname + "/uploads");
     },
     filename: function (req, file, callback) {
         uidSafe(24).then(function (uid) {
@@ -40,7 +39,6 @@ app.use(
 );
 
 app.get("/images", (req, res) => {
-    // console.log("response: ", res);
     db.getImages()
         .then(({ rows }) => {
             console.log("rows: ", rows);
@@ -51,17 +49,22 @@ app.get("/images", (req, res) => {
         });
 });
 
-// work form this point:
 // The object returned from this call to multer has middleware functions attached to it that can be used to handle uploads on specific routes. You do not want to pass any of these functions to app.use because you only want to allow uploads on specific routes:
 // The call to single indicates that we are only expecting one file. The string passed to single is the name of the field in the request:
 app.post("/upload", uploader.single("file"), s3.upload, function (req, res) {
     // If nothing went wrong the file is already in the uploads directory
-    const { url, title, username, description } = req.body;
-    const url = `${s3Url}{req.file.filename}`;
+    const { title, username, description } = req.body;
+    const url = `${s3Url}${req.file.filename}`;
+    // console.log("req.body: ", req.body);
+    // console.log("url: ", url);
     if (req.file) {
         db.uploadImages(url, username, title, description)
             .then(() => {
                 res.json({ url, username, title, description });
+                console.log(
+                    "image uploaded: ",
+                    res.json({ url, username, title, description })
+                );
             })
             .catch((err) => {
                 console.log("error while uploading image to DB: ", err);
