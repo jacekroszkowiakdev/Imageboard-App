@@ -4,7 +4,7 @@
         // The first argument is a string to use as the name of the component. You use the name as a tag name in your HTML to render the component
 
         // You don't pass an el to Vue.component because they get rendered in place where their tag is encountered. Rather than an el, you specify a template to use for the component's DOM subtree:
-        template: "#template",
+        template: "#modal-template",
         props: ["doSOMETHING/PLACEHOLDER"],
 
         //data you pass to Vue.component must be a function that returns an object:

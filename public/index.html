@@ -13,42 +13,43 @@
         <modal-component v-if="id" :onscreen="onscreen" @close="closeModal"></modal-component>
 
         <div id="uploader">
-        <form action="upload" method="post" enctype="multipart/form-data">
-            <!-- Bind the input value to the Vue instance with `v-model` -->
-            <input type="text" name="title" placeholder="Title" v-model="title" />
-            <input type="text" name="description" placeholder="Description" v-model="description" />
-            <input type="text" name="username" placeholder="Username" v-model="username" />
-            <!-- Handle file changes by providing a method to `@change` -->
-            <input
-                type="file"
-                name="image"
-                accept="image/*"
-                @change="handleFileChange"
-            />
-            <!-- Handle upload clicks by providing a method to `@click` -->
-            <!-- Also available:  <button @click="upload">Upload</button> -->
-            <button @click.prevent.default="handleOnClickUpload">Upload</button>
-        </form>
+            <form action="upload" method="post" enctype="multipart/form-data">
+                <!-- Bind the input value to the Vue instance with `v-model` -->
+                <input type="text" name="title" placeholder="Title" v-model="title" />
+                <input type="text" name="description" placeholder="Description" v-model="description" />
+                <input type="text" name="username" placeholder="Username" v-model="username" />
+                <!-- Handle file changes by providing a method to `@change` -->
+                <input
+                    type="file"
+                    name="image"
+                    accept="image/*"
+                    @change="handleFileChange"
+                />
+                <!-- Handle upload clicks by providing a method to `@click` -->
+                <!-- Also available:  <button @click="upload">Upload</button> -->
+                <button @click.prevent.default="handleOnClickUpload">Upload</button>
+            </form>
 
-        <div class="imageboard">
-        <ul v-for="image in images">
+            <div class="imageboard">
+            <ul v-for="image in images">
 
-            <!-- <div class="image_tile" @click="getId(image.id)"  > -->
-                <img :src="image.url" alt="">
-                <h4>{{image.title}}</h4>
-                <p>{{image.description}}</p>
-            <!-- </div> -->
+                <div class="image_tile" @click="getId(image.id)"  >
+                    <img :src="image.url" alt="">
+                    <h4>{{image.title}}</h4>
+                    <p>{{image.description}}</p>
+                </div>
+            </div>
+            </ul>
         </div>
-        </ul>
     </div>
 
 <!-- This is where the code for the component goes: -->
-<script id='template' type="text/x-template">
-    <div class="component">
-
-        <!-- <h2> Image ID: {{image.id}} <h2>
-        <h2 @click="closeModal">Close Me!</h2> -->
+<script id='modal-template' type="text/x-template">
+    <div>
+        <h2> Image <h2>
+        <h2 @click="closeModal">Close Me!</h2>
     </div>
+
 </script>
 
 
