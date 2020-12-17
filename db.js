@@ -13,5 +13,8 @@ module.exports.uploadImages = (url, username, title, description) => {
 };
 
 module.exports.getClickedImageDetails = (id) => {
-    return db.query(`SELECT * FROM images WHERE id = $1`), [id];
+    return db.query(
+        `SELECT url, username, title, description, created_at FROM images WHERE id = $1`,
+        [id]
+    );
 };

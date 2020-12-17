@@ -2,28 +2,79 @@
     box-sizing: border-box;
 }
 
-[v-cloak] > * {
+/* [v-cloak] > * {
     display: none;
 }
+
+[v-cloak]::before {
+    content: "loading...";
+} */
 
 main {
     display: flex;
 }
 
-modal-component {
-    position: fixed;
+#imageboard {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, 300px);
+    grid-gap: 2rem;
+    justify-items: center;
+    padding: 0;
+    margin-left: 50px;
+    margin-right: 50px;
+}
+
+.imageboard-image {
+    padding: 0.5rem;
+    font-size: 1.2rem;
+    text-align: center;
+    color: white;
+    border: black solid 2px;
+    border-radius: 13px;
+}
+
+.modal {
     width: 100vw;
     height: 100vh;
-    visibility: hidden;
-    display: grid;
-    z-index: 100;
+    background-color: rgba(216, 30, 52, 0.5);
+    position: fixed;
+    top: 0;
 }
 
-modal:onscreen {
-    visibility: visible; V=CLOAK
+.modal-image {
+    background-color: black;
+    color: white;
+    width: 100%;
+    /* margin: 10px 5px 5px 10px; */
+    padding-top: 2%;
+    padding-bottom: 2%;
+    text-align: center;
+    border-radius: 10px;
 }
 
+.modal-image > img {
+    width: 400px;
+    height: 300px;
+    object-fit: contain;
+}
 
-[v-cloak]::before {
-    content: "loading...";
+.modal-image > h1,
+.modal-image > h4,
+.modal-image > p {
+    margin-bottom: 10px;
+}
+
+button {
+    background-color: white;
+    color: black;
+    cursor: pointer;
+    border-radius: 5px;
+    height: 25px;
+    width: 70px;
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.5);
+    transition: all 0.3s ease 0s;
+    align-self: center;
+    padding-top: 2px;
+    margin-left: 50%;
+    transform: translate(-50%);
 }
