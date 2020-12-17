@@ -76,6 +76,18 @@ app.post("/upload", uploader.single("file"), s3.upload, function (req, res) {
     }
 });
 
+app.get("/clicked-image/:id", (req, res) => {
+    console.log("req.params: ", req.params);
+    const { id } = req.params;
+    db.getClickedImageDetails(id)
+        .then(({ rows }) => {
+            res.json(rows);
+        })
+        .catch((err) => {
+            console.log("error in reading selected image details: ", err);
+        });
+});
+
 // in general it is good practice to serve files with express.static last!
 app.use(express.static("public"));
 

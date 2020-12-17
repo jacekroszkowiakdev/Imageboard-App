@@ -13,23 +13,17 @@
         <div id="uploader">
             <form method="POST" action="upload"  enctype="multipart/form-data">
                 <!-- Bind the input value to the Vue instance with `v-model` -->
-                <input type="text" name="title" placeholder="Title" v-model="title" />
-                <input type="text" name="description" placeholder="Description" v-model="description" />
-                <input type="text" name="username" placeholder="Username" v-model="username" />
+                <input type="text" name="title" placeholder="Title" v-model="title" required/>
+                <input type="text" name="description" placeholder="Description" v-model="description" required/>
+                <input type="text" name="username" placeholder="Username" v-model="username" required/>
                 <!-- Handle file changes by providing a method to `@change` -->
-                <input
-                    type="file"
-                    name="image"
-                    accept="image/*"
-                    @change="handleFileChange"
-                />
+                <input type="file" name="image" accept="image/*" @change="handleFileChange"/>
                 <!-- Handle upload clicks by providing a method to `@click` -->
                 <!-- Also available:  <button @click="upload">Upload</button> -->
                 <button @click.prevent.default="handleOnClickUpload">Upload</button>
             </form>
 
             <div class="imageboard">
-
                 <ul v-for="image in images">
                     <div class="image_tile" @click="getId(image.id)"  >
                         <img :src="image.url" alt="">
@@ -38,10 +32,11 @@
                      </div>
                 </ul>
             </div>
+
         </div>
 
         <!-- MODAL COMPONENT GETS RENDERED INSIDE MAIN: -->
-         <modal-component v-if="clickedImageId" :id="clickedImageId" :onscreen="true" @close="closeModal"></modal-component>
+         <modal-component v-if="clickedImageId" :id="clickedImageId" @close="closeModal"></modal-component>
     </div>
 
 
@@ -50,7 +45,7 @@
     <div>
         <h2>{{title}}<h2>
         <h4>{{description}}</h4>
-        <p>`Uploaded by {{username}} on {{created_at}}`</p>
+        <p>`Uploaded by ${{username}} on ${{created_at}}`</p>
 
         <h2 @click="closeModal" class="close">Close Me!</h2>
     </div>

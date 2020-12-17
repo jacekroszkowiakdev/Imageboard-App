@@ -24,12 +24,13 @@
             console.log("props: ", this.id); // not showing
 
             var self = this;
-            axios.get("/clicked-image", this.id);
+
+            axios.get("/clicked-image/:id", this.id);
             then(function (res) {
                 console.log("res inside mounted modal: ", res);
-                self.images = res.data;
+                self.images = res.data[0];
             }).catch(function (err) {
-                console.log(`GET" "/clicked-image:"`, res);
+                console.log(`GET" "/clicked-image error:"`, err);
             });
         },
         methods: {
@@ -97,9 +98,8 @@
 
             getId: function (imageId) {
                 console.log("clicked ID: ", imageId);
-                this.id = imageid;
-                // console.log("this.id: ", this.id);
-                this.clickedImageId = imageId;
+                clickedImageId = imageId;
+                this.id = imageId;
             },
         },
     });
