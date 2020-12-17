@@ -1,4 +1,35 @@
 (function () {
+    Vue.component("comments", {
+        template: "#comments-section",
+        props: ["id"],
+
+        data: function () {
+            heading: "Comments Section",
+            comments: [], // an array of all comments for the image
+            username: "", // stores the value of the username input field
+            comment: "", // stores the value of the comment input field
+        },
+        mounted: function () {
+            // retrieve comments on component mount:
+            axios
+                .get("/comments" + this.id)
+                    .then(function (res) {
+                       self.comments = res.data.comments;
+                       self.username = res.data[0].comments;
+                    //    self.comment = res.data[]
+                    }).catch(function (err) {
+                        console.log(`axios.get "/comments" failed with: ${err}`);
+                    })
+        },
+        methods: {
+            submitComment () {
+                // insert a comment to DB
+                // DONT use formData, instead pass plain JS object as 2nd arg in axios.post
+                // upon success, new comment should be added into the arr of comments
+            }
+        }
+    });
+
     Vue.component("modal-component", {
         template: "#modal-template",
         props: ["id"],
