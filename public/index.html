@@ -36,7 +36,7 @@
         </div>
 
         <!-- MODAL COMPONENT GETS RENDERED INSIDE MAIN: -->
-         <modal-component v-if="clickedImageId" :id="clickedImageId" @click="closeMe"></modal-component>
+         <modal-component v-if="clickedImageId" :id="clickedImageId" @close="closeMe"></modal-component>
     </div>
 
 
@@ -50,8 +50,8 @@
                 <p><i>Uploaded by {{username}} on  {{created_at}}</i></p>
                 <button @click="closeModal" class="close"> Close Me! </button>
         </div>
-        <script id="comments-section" type="text/x-template">
-                <label for="comment">comment</label>
+
+                <!-- <label for="comment">comment</label>
                 <input type="text" name="comment" placeholder="Comment" v-model="comment" required/>
                 <label for="username-comment">username</label>
                 <input type="text" name="username-comment" placeholder="username-comment" v-model="username-comment" required/>
@@ -60,8 +60,8 @@
                 <div class="image-comments" v-for="comment in comments">
                     <!-- <h5>{{TREŚĆ KOMENTARZA}}</h5>
                     <p>{{COMMENT.USERNAME}} on {{COEMMENT CREATED AT}}</p> -->
-                </div>
-        </script>
+                <!-- </div>  -->
+
     </div>
 </script>
 
