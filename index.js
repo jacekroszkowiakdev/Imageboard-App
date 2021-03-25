@@ -78,7 +78,18 @@ app.get("/clicked-image/:id", (req, res) => {
             res.json(rows);
         })
         .catch((err) => {
-            console.log("error in reading selected image details: ", err);
+            console.log("error while reading selected image details: ", err);
+        });
+});
+
+app.get("/comments/:id", (req, res) => {
+    const { id } = req.params;
+    db.getComments(id)
+        .then(({ rows }) => {
+            res.json(rows);
+        })
+        .catch((err) => {
+            console.log("error while reading comments from DB: ", err);
         });
 });
 

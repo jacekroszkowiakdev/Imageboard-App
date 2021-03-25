@@ -38,10 +38,9 @@ module.exports.upload = (req, res, next) => {
             console.log("amazon upload complete");
             next();
             // OPTIONAL - to delete the file, 2nd argument is "no op function", it is just fullfiling the requirements of unlink:
-            fs.unlink(path, () => {});
+            fs.unlink(path, () => {}); // "empty" function --> noop function (no operation)
         })
         .catch((err) => {
-            // uh oh
             console.log("upload to S3 failed: ", err);
             res.sendStatus(404);
         });

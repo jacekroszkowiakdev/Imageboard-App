@@ -18,3 +18,15 @@ module.exports.getClickedImageDetails = (id) => {
         [id]
     );
 };
+
+module.exports.getComments = (clickedImageId) => {
+    return db.query(`SELECT * FROM comments WHERE clickedImageId = $1`, [
+        clickedImageId,
+    ]);
+};
+
+module.exports.submitComment = (comment, username, clickedImageId) => {
+    const q = `INSERT INTO comments (comment, username_comment, clickedImageId) VALUES ($1, $2, $3) RETURNING created_at`;
+    const params = [comment, username, clickedImageId];
+    return db.query(q, params);
+};
